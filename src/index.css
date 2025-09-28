@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+@import "tailwindcss";
+
+:root {
+    --primary-color: #008ECC;
+    --text-color: #666666;
+    --heading-color: #222222;
+    --light-color: #888888;
+    --border-color: #EDEDED;
+    --bg1-color: #F5F5F5;
+    --bg2-color: #F6F6FC;
+    --bg3-color: #F3F9FB;
+    --yellow-color: #E3BC01;
+    --white-color: #FFFFFF;
+    --line-color: #D9D9D9;
+    --font-base: "ABeeZee", sans-serif;
+}
+
+* {
+  font-family: var(--font-base);
+}
+
+@layer components{
+    .container{
+        width: 90%;
+        margin: 0 auto;
+    }
+}
