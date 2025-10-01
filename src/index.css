@@ -17,12 +17,20 @@
 }
 
 * {
-  font-family: var(--font-base);
+    font-family: var(--font-base);
 }
 
-@layer components{
-    .container{
+@layer components {
+    .container {
         width: 90%;
         margin: 0 auto;
     }
+}
+
+.swiper-pagination-bullet {
+  @apply w-2 h-2 bg-gray-500 opacity-70  rounded-full transition-all;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-[var(--white-color)] w-3 opacity-100 scale-110;
 }
