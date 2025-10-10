@@ -5,10 +5,13 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { IoPersonOutline } from "react-icons/io5";
 import { CiShoppingCart } from "react-icons/ci";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { useLocation } from 'react-router-dom';
+
 
 
 export default function Header() {
     const [openIndex, setOpenIndex] = useState(null);
+    const location = useLocation()
 
     const dropdowns = [
         { label: "Covers", options: ["Option A", "Option B"] },
@@ -33,11 +36,14 @@ export default function Header() {
 
                 <div className="flex items-center">
                     {/* search box  */}
-                    <div className=" min-w-[150px] sm:min-w-[250px]  md:min-w-[300px]  lg:min-w-[500px] flex items-center bg-[var(--bg3-color)] text-[var(--text-color)] rounded p-1 sm:p-3">
-                        <CiSearch className='text-[var(--primary-color)] sm:text-2xl ' />
-                        <input className='w-full  outline-none rounded mx-1 text-xs sm:text-sm' type="text" name="" placeholder='Search essentials, groceries and more...' />
-                        <TfiMenuAlt className='text-[var(--primary-color)] sm:text-xl hidden sm:flex ' />
-                    </div>
+                    {
+                    location.pathname !== '/orders'
+                     && (<div className=" min-w-[150px] sm:min-w-[250px]  md:min-w-[300px]  lg:min-w-[500px] flex items-center bg-[var(--bg3-color)] text-[var(--text-color)] rounded p-1 sm:p-3">
+                            <CiSearch className='text-[var(--primary-color)] sm:text-2xl ' />
+                            <input className='w-full  outline-none rounded mx-1 text-xs sm:text-sm' type="text" name="" placeholder='Search essentials, groceries and more...' />
+                            <TfiMenuAlt className='text-[var(--primary-color)] sm:text-xl hidden sm:flex ' />
+                        </div>)
+                    }
                     {/* btn sign and signup */}
                     <div className="flex">
                         {/* shopping card  */}
@@ -57,45 +63,51 @@ export default function Header() {
             <hr className=' border-[var(--border-color)]' />
 
             {/* categorie  */}
-            <div className="container hidden my-3 sm:flex text-xs md:text-sm lg:text-3xs gap lg:justify-evenly justify-between overflow-visible">
-                {/* --------- btn ----- */}
-                {
-                    dropdowns.map((item, i) => (
-                        <div key={i} className="relative text-center w-fit">
-                            <button
-                                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                                className={`${openIndex === i
-                                    ? "bg-[var(--primary-color)] text-white"
-                                    : "bg-[var(--bg3-color)] text-[var(--text-color)]"
-                                    } flex items-center p-0.5 md:p-1 justify-center cursor-pointer w-full rounded-full hover:bg-[var(--primary-color)] hover:text-white`}
-                            >
-                                {item.label}
-                                <MdOutlineKeyboardArrowDown
-                                    className={`text-2xl ml-1 transform transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""
-                                        }`}
-                                />
-                            </button>
-
-                            {openIndex === i && (
-                                <ul className="absolute bg-[var(--bg3-color)] w-full mt-2 rounded z-20 left-3 shadow-lg">
-                                    {item.options.map((opt, idx) => (
-                                        <li
-                                            key={idx}
-                                            className="p-2 hover:bg-[var(--primary-color)] rounded cursor-pointer"
+            {
+                location.pathname === "/" && (
+                    <>
+                        <div className="container hidden my-3 sm:flex text-xs md:text-sm lg:text-3xs gap lg:justify-evenly justify-between overflow-visible">
+                            {/* --------- btn ----- */}
+                            {
+                                dropdowns.map((item, i) => (
+                                    <div key={i} className="relative text-center w-fit">
+                                        <button
+                                            onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                                            className={`${openIndex === i
+                                                ? "bg-[var(--primary-color)] text-white"
+                                                : "bg-[var(--bg3-color)] text-[var(--text-color)]"
+                                                } flex items-center p-0.5 md:p-1 justify-center cursor-pointer w-full rounded-full hover:bg-[var(--primary-color)] hover:text-white`}
                                         >
-                                            {opt}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                                            {item.label}
+                                            <MdOutlineKeyboardArrowDown
+                                                className={`text-2xl ml-1 transform transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""
+                                                    }`}
+                                            />
+                                        </button>
+
+                                        {openIndex === i && (
+                                            <ul className="absolute bg-[var(--bg3-color)] w-full mt-2 rounded z-20 left-3 shadow-lg">
+                                                {item.options.map((opt, idx) => (
+                                                    <li
+                                                        key={idx}
+                                                        className="p-2 hover:bg-[var(--primary-color)] rounded cursor-pointer"
+                                                    >
+                                                        {opt}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </div>
+                                ))
+                            }
+
+
+
                         </div>
-                    ))
-                }
-
-
-
-            </div>
-            <hr className=' border-[var(--border-color)]' />
+                        <hr className=' border-[var(--border-color)]' />
+                    </>
+                )
+            }
         </div>
     )
 }
