@@ -40,3 +40,6 @@
 .no-arrows::-webkit-inner-spin-button{
   -webkit-appearance: none;
 }
+hr{
+  border: 1px solid var(--border-color);
+}

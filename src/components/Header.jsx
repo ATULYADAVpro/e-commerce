@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 
 
-export default function Header() {
+export default function Header({ setSidemenu }) {
     const [openIndex, setOpenIndex] = useState(null);
     const location = useLocation()
 
@@ -30,15 +30,15 @@ export default function Header() {
             {/* Header  */}
             <div className="container mt-2 flex justify-between">
                 <div className=" flex items-center space-x-5">
-                    <button className=' cursor-pointer bg-[var(--bg3-color)] text-xl sm:text-3xl p-1 text-[var(--primary-color)] rounded'> <HiOutlineMenuAlt2 /> </button>
+                    <button onClick={()=>setSidemenu((prev => !prev))} className=' cursor-pointer bg-[var(--bg3-color)] text-xl sm:text-3xl p-1 text-[var(--primary-color)] rounded'> <HiOutlineMenuAlt2 /> </button>
                     <h1 className='font-extrabold text-[var(--primary-color)] text-sm sm:text-2xl '>MegaMart</h1>
                 </div>
 
                 <div className="flex items-center">
                     {/* search box  */}
                     {
-                    location.pathname !== '/orders'
-                     && (<div className=" min-w-[150px] sm:min-w-[250px]  md:min-w-[300px]  lg:min-w-[500px] flex items-center bg-[var(--bg3-color)] text-[var(--text-color)] rounded p-1 sm:p-3">
+                        location.pathname !== '/orders'
+                        && (<div className=" min-w-[150px] sm:min-w-[250px]  md:min-w-[300px]  lg:min-w-[500px] flex items-center bg-[var(--bg3-color)] text-[var(--text-color)] rounded p-1 sm:p-3">
                             <CiSearch className='text-[var(--primary-color)] sm:text-2xl ' />
                             <input className='w-full  outline-none rounded mx-1 text-xs sm:text-sm' type="text" name="" placeholder='Search essentials, groceries and more...' />
                             <TfiMenuAlt className='text-[var(--primary-color)] sm:text-xl hidden sm:flex ' />
