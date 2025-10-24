@@ -12,6 +12,7 @@ import { useLocation } from 'react-router-dom';
 export default function Header({ setSidemenu }) {
     const [openIndex, setOpenIndex] = useState(null);
     const location = useLocation()
+    const [isUser, setisUser] = useState(null)
 
     const dropdowns = [
         { label: "Covers", options: ["Option A", "Option B"] },
@@ -30,7 +31,7 @@ export default function Header({ setSidemenu }) {
             {/* Header  */}
             <div className="container mt-2 flex justify-between">
                 <div className=" flex items-center space-x-5">
-                    <button onClick={()=>setSidemenu((prev => !prev))} className=' cursor-pointer bg-[var(--bg3-color)] text-xl sm:text-3xl p-1 text-[var(--primary-color)] rounded'> <HiOutlineMenuAlt2 /> </button>
+                    <button onClick={() => setSidemenu((prev => !prev))} className=' cursor-pointer bg-[var(--bg3-color)] text-xl sm:text-3xl p-1 text-[var(--primary-color)] rounded'> <HiOutlineMenuAlt2 /> </button>
                     <h1 className='font-extrabold text-[var(--primary-color)] text-sm sm:text-2xl '>MegaMart</h1>
                 </div>
 
@@ -52,10 +53,21 @@ export default function Header({ setSidemenu }) {
                             <span className='ml-1 font-bold'>Cart</span>
                         </button>
                         {/* sign in and signup  */}
-                        <button className='hidden sm:flex items-center space-x-1 text-[var(--light-color)] lg:border-l text-[8px] sm:text-xs px-2'>
-                            <span className='text-[var(--primary-color)] text-sm sm:text-xl'> <IoPersonOutline /></span>
-                            <span className='ml-1 font-bold'>Sign In</span>
-                        </button>
+                        {
+                            isUser === null && (
+                                <button className='hidden sm:flex items-center space-x-1 text-[var(--light-color)] lg:border-l text-[8px] sm:text-xs px-2'>
+                                    <span className='text-[var(--primary-color)] text-sm sm:text-xl'> <IoPersonOutline /></span>
+                                    <span className='ml-1 font-bold'>Sign In</span>
+                                </button>
+                            )
+                        }
+                        {
+                            isUser !== null && (
+                                <button className='hidden sm:flex items-center space-x-1 text-[var(--light-color)] lg:border-l text-[8px] sm:text-xs px-2'>
+                                    <span className='text-[var(--primary-color)] text-sm sm:text-xl'> <IoPersonOutline /></span>
+                                </button>
+                            )
+                        }
                     </div>
                 </div>
             </div>
